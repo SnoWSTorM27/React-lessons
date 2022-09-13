@@ -22,12 +22,33 @@ const CountersList = () => {
     setCounters(initialState);
   };
 
+  const handleIncrement =(id)=>{
+    const newCounters = counters.map((counter) => {
+      if (counter.id === id) {
+        return {...counter, value: counter.value + 1};
+      }
+      return counter;
+    });
+    setCounters(newCounters);
+  }; 
+  const handleDecrement =(id)=>{
+    const newCounters = counters.map((counter) => {
+      if (counter.id === id) {
+        return {...counter, value: counter.value - 1};
+      }
+      return counter;
+    });
+    setCounters(newCounters);
+  }; 
+
   return (
     <>
       {counters.map((count) => (
         <Counter 
           key={count.id}
           onDelete={handleDelete}
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
           {...count}
         />
       ))}
